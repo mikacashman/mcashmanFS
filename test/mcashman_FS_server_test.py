@@ -53,7 +53,7 @@ class mcashman_FSTest(unittest.TestCase):
     def getContext(self):
         return self.__class__.ctx
 
-    def FeatureSelection_test(self):
+    def test_FeatureSelection(self):
         # Prepare test objects in workspace if needed using 
         # self.getWsClient().save_objects({'workspace': self.getWsName(), 'objects': []})
         #

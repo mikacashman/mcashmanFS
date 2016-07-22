@@ -57,18 +57,31 @@ class mcashman_FS:
 		raise ValueError('Error loading original Pangenome object from workspace:\n' + orig_error)
 	print('Got Pangenome')
 	
-	#Step 3 - Actual Functional Code
+	#Step 3 - Create Matrix
 	print('Reading Pangenome into Array')
 	Data = []
 	Row = []
 	count = 0
+	Strains = []
+	Genes = []
 	for i in range(0,length(pangenome.ortholog)): #for each gene
 		print(pangenome.ortholog[i].id)
 		count+=1
+		
 	
 		#for j in range(0,pangenome.genome_refs):#for each genome
 		#Row[i]=length(pangenome.orthologs.orthologs)
 		
+	#Step 4 - Create random list of indices
+	Index=[]
+	for i in range(0,length(pangenome.ortholog)):
+		Index[i]=i
+	random.shuffle(Index)
+
+	#Step 5 - Run in Weka
+	#Step 6 - Record results for all genes (metric equation)
+	#Step 7 - Repeat x times
+	#Step 8 - Compute final metrics and report
 
 	print('Done I guess')
 	#END FeatureSelection
