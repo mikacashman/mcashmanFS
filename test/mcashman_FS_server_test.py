@@ -65,11 +65,20 @@ class mcashman_FSTest(unittest.TestCase):
 	
 	# This test should probably fail but isn't even running
 	print("starting test...")
-	panEX = open ('TestOrthoRhizo.json', 'r')
-	self.getWsClient().save_objects({'workspace': self.getWsName(), 'objects':
-		[{'type': 'KBaseGenomes.Pangenome', 'name': 'TestRhizo', 'data': panEX}]})
-	ret = self.getImpl().FeatureSelection(self.getContext,{'workspace':self.getWsName(),
-		'classes':{0}, 'pangenome_ref':'TestRhizo'})
+	#test_dir = os.path.dirname(os.path.realpath(__file__))
+	#file_path = test_dir + "/TestOrthoRhizo.json" 
+	#print(file_path + "\n")
+	#print(os.system('pwd'))
+	#print(os.system('ls'))
+	#print(self.getWsName())
+	#panEX = open ('TestOrthoRhizo.json')
+	#import json - json.read
+	#with open("{0}/{1}".format(test_dir,'TestOrthoRhizo.json'),'r') as json_data:
+	#	eo = json.load(json_data)
+	#self.getWsClient().save_objects({'workspace': self.getWsName(), 'objects':
+	#	[{'type': 'KBaseGenomes.Pangenome', 'name': 'TestRhizo', 'data': json_data}]})
+	ret = self.getImpl().FeatureSelection(self.getContext(),{'workspace_name':'mikaelacashman:1469216639277',
+		'classes':{0}, 'pangenome_ref':'TestOrthoRhizo'})
 	print("Running asserts...")
 	self.assertEqual(ret[0],12660)
 	#pass

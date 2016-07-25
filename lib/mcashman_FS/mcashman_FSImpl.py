@@ -1,5 +1,10 @@
 #BEGIN_HEADER
 # The header block is where all import statments should live
+import sys
+import traceback
+import uuid
+from pprint import pprint, pformat
+from biokbase.workspace.client import Workspace as workspaceService
 #END_HEADER
 
 
@@ -19,13 +24,15 @@ class mcashman_FS:
     # the latter method is running.
     #########################################
     #BEGIN_CLASS_HEADER
+    workspaceURL = None
     #END_CLASS_HEADER
 
     # config contains contents of config file in a hash or None if it couldn't
     # be found
     def __init__(self, config):
         #BEGIN_CONSTRUCTOR
-        #END_CONSTRUCTOR
+        self.workspaceURL = config['workspace-url']
+	#END_CONSTRUCTOR
         pass
 
     def FeatureSelection(self, ctx, params):
@@ -37,7 +44,7 @@ class mcashman_FS:
 	#Step 1 - Parse input and catch any errors
 	if 'workspace_name' not in params:
 		raise ValueError('Parameter workspace is not set in input arguments')
-	workspace_name = parmas['workspace_name']
+	workspace_name = params['workspace_name']
 	#check for classes
 	if 'pangenome_ref' not in params:
 		raise ValueError('Parameter pangenome_ref is not set in input arguments')
@@ -48,7 +55,7 @@ class mcashman_FS:
 	wsClient = workspaceService(self.workspaceURL, token=token)
 	try:
 		#why the 0th element?
-		pangenome = ws.Client.get_objects([{'ref': workspace_name+'/'+pangenome}])[0]['data']
+		pan = wsClient.get_objects([{'ref': workspace_name+'/'+pangenome}])[0]['data']
 	except:
 		#idk what these do
 		exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -64,8 +71,8 @@ class mcashman_FS:
 	count = 0
 	Strains = []
 	Genes = []
-	for i in range(0,length(pangenome.ortholog)): #for each gene
-		print(pangenome.ortholog[i].id)
+	for i in range(0,len(pan['orthologs'])): #for each gene
+		#print(pangenome.ortholog[i].id)
 		count+=1
 		
 	
@@ -73,10 +80,10 @@ class mcashman_FS:
 		#Row[i]=length(pangenome.orthologs.orthologs)
 		
 	#Step 4 - Create random list of indices
-	Index=[]
-	for i in range(0,length(pangenome.ortholog)):
-		Index[i]=i
-	random.shuffle(Index)
+	#Index=[]
+	#for i in range(0,len(pangenome.ortholog)):
+	#	Index[i]=i
+	#random.shuffle(Index)
 
 	#Step 5 - Run in Weka
 	#Step 6 - Record results for all genes (metric equation)
@@ -85,10 +92,15 @@ class mcashman_FS:
 
 	print('Done I guess')
 	#END FeatureSelection
+	
 
+
+	returnVal = {
+		'temp' : str(count)
+	}
         # At some point might do deeper type checking...
-        if not isinstance(returnVal, dict):
-            raise ValueError('Method FeatureSelection return value ' +
-                             'returnVal is not type dict as required.')
+        #if not isinstance(returnVal, dict):
+        #    raise ValueError('Method FeatureSelection return value ' +
+        #                     'returnVal is not type dict as required.')
         # return the results
-        return [count]
+        return [returnVal]
