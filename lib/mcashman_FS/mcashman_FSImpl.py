@@ -3,6 +3,7 @@
 import sys
 import traceback
 import uuid
+import random
 from pprint import pprint, pformat
 from biokbase.workspace.client import Workspace as workspaceService
 #END_HEADER
@@ -45,7 +46,8 @@ class mcashman_FS:
 	if 'workspace_name' not in params:
 		raise ValueError('Parameter workspace is not set in input arguments')
 	workspace_name = params['workspace_name']
-	#check for classes
+	if 'classes' not in params:
+		raise ValueError('Parmeter classes is not set in input arguements')
 	if 'pangenome_ref' not in params:
 		raise ValueError('Parameter pangenome_ref is not set in input arguments')
 	pangenome = params['pangenome_ref']
@@ -63,38 +65,64 @@ class mcashman_FS:
 		orig_error = ''.join('   ' + line for line in lines)
 		raise ValueError('Error loading original Pangenome object from workspace:\n' + orig_error)
 	print('Got Pangenome')
+	if len(params['classes']) != len(pan['genome_refs']):
+		raise ValueError('Error: Number of classes and genomes don\'t match')
 	
 	#Step 3 - Create Matrix
 	print('Reading Pangenome into Array')
-	Data = []
-	Row = []
+	Data = [[0 for x in range(len(pan['genome_refs']))] for y in range(len(pan['orthologs']))] #counts
 	count = 0
-	Strains = []
-	Genes = []
+	Strains = [] #genome names
+	Genes = [] #gene names
+	Functions = [] #gene functions
+	temp = 0
+	for i in range(0,len(pan['genome_refs'])):
+		Strains.append(pan['genome_refs'][i])
+		print(Strains[i])
 	for i in range(0,len(pan['orthologs'])): #for each gene
-		#print(pangenome.ortholog[i].id)
 		count+=1
-		
-	
-		#for j in range(0,pangenome.genome_refs):#for each genome
-		#Row[i]=length(pangenome.orthologs.orthologs)
+		Genes.append(pan['orthologs'][i]['id'])
+		Functions.append(pan['orthologs'][i]['function'])
+		for j in range(0,len(pan['orthologs'][i]['orthologs'])):#for each instance of gene
+			#check genome and add to proper place
+			temp = Strains.index(pan['orthologs'][i]['orthologs'][j][2])
+			Data[i][temp] = 1 #+=1 for numeric ---- =1 for binary
 		
 	#Step 4 - Create random list of indices
-	#Index=[]
-	#for i in range(0,len(pangenome.ortholog)):
-	#	Index[i]=i
-	#random.shuffle(Index)
+	Index=[]
+	for i in range(0,len(pan['orthologs'])):
+		Index.append(i)
+	random.shuffle(Index)
 
-	#Step 5 - Run in Weka
-	#Step 6 - Record results for all genes (metric equation)
-	#Step 7 - Repeat x times
-	#Step 8 - Compute final metrics and report
+	#Step 5 - Create Arff file
+	arff = open("weka.arff","w+")
+	arff.write("@RELATION FS\n\n")
+	for i in range(0,len(pan['orthologs'])):
+		arff.write("@ATTRIBUTE " + Genes[i] + "{ON,OFF}\n")
+	arff.write("@ATTRIBUTE class {GROWTH,NO_GROWTH}\n")
+	arff.write("\n@data\n")
+	for i in range(0,len(pan['genome_refs'])):
+		for j in range(0,len(pan['orthologs'])):
+			if Data[j][i] == 1:
+				arff.write("ON,")
+			else:
+				arff.write("OFF,")
+		if params['classes'][i] == 1:
+			arff.write("GROWTH\n")
+		else:
+			arff.write("NO_GROWTH\n") 
+	arff.close()
+	#Step 6 - Run in Weka
+	#Step 7 - Record results for all genes (metric equation)
+	#Step 8 - Repeat x times
+	#Step 9 - Compute final metrics and report
 
-	print('Done I guess')
-	#END FeatureSelection
-	
+	print('Size of Data: ' + str(len(Data)))
+	for i in range(0,4):
+		for j in range(0,len(pan['genome_refs'])):
+			print(str(Data[i][j]) + ' ') 
 
-
+	print('Ready to return')
 	returnVal = {
 		'temp' : str(count)
 	}
@@ -104,3 +132,4 @@ class mcashman_FS:
         #                     'returnVal is not type dict as required.')
         # return the results
         return [returnVal]
+	#END FeatureSelection
