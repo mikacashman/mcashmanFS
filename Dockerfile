@@ -8,6 +8,7 @@ MAINTAINER KBase Developer
 # RUN apt-get update
 
 RUN apt-get -y install weka
+env CLASSPATH /usr/share/java/weka.jar:CLASSPATH
 
 # -----------------------------------------
 

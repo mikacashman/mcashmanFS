@@ -4,6 +4,7 @@ import sys
 import traceback
 import uuid
 import random
+import os #for callig weka - fix later
 from pprint import pprint, pformat
 from biokbase.workspace.client import Workspace as workspaceService
 #END_HEADER
@@ -33,6 +34,7 @@ class mcashman_FS:
     def __init__(self, config):
         #BEGIN_CONSTRUCTOR
         self.workspaceURL = config['workspace-url']
+	self.scratch = config['scratch']
 	#END_CONSTRUCTOR
         pass
 
@@ -42,7 +44,7 @@ class mcashman_FS:
         #BEGIN FeatureSelection
         print('Starting function')
 
-	#Step 1 - Parse input and catch any errors
+	### STEP 1 - Parse input and catch any errors
 	if 'workspace_name' not in params:
 		raise ValueError('Parameter workspace is not set in input arguments')
 	workspace_name = params['workspace_name']
@@ -52,7 +54,7 @@ class mcashman_FS:
 		raise ValueError('Parameter pangenome_ref is not set in input arguments')
 	pangenome = params['pangenome_ref']
 
-	#Step 2 - Get the Input Data
+	### STEP 2 - Get the Input Data
 	token = ctx['token']
 	wsClient = workspaceService(self.workspaceURL, token=token)
 	try:
@@ -68,7 +70,7 @@ class mcashman_FS:
 	if len(params['classes']) != len(pan['genome_refs']):
 		raise ValueError('Error: Number of classes and genomes don\'t match')
 	
-	#Step 3 - Create Matrix
+	### STEP 3 - Create Matrix
 	print('Reading Pangenome into Array')
 	Data = [[0 for x in range(len(pan['genome_refs']))] for y in range(len(pan['orthologs']))] #counts
 	count = 0
@@ -88,14 +90,16 @@ class mcashman_FS:
 			temp = Strains.index(pan['orthologs'][i]['orthologs'][j][2])
 			Data[i][temp] = 1 #+=1 for numeric ---- =1 for binary
 		
-	#Step 4 - Create random list of indices
+	### STEP 4 - Create random list of indices
 	Index=[]
 	for i in range(0,len(pan['orthologs'])):
 		Index.append(i)
 	random.shuffle(Index)
 
-	#Step 5 - Create Arff file
-	arff = open("weka.arff","w+")
+	### STEP 5 - Create Arff file
+	filename = self.scratch + "/weka.arff"
+	outfilename = self.scratch + "/weka.out"
+	arff = open(filename,"w+")
 	arff.write("@RELATION FS\n\n")
 	for i in range(0,len(pan['orthologs'])):
 		arff.write("@ATTRIBUTE " + Genes[i] + "{ON,OFF}\n")
@@ -112,10 +116,54 @@ class mcashman_FS:
 		else:
 			arff.write("NO_GROWTH\n") 
 	arff.close()
-	#Step 6 - Run in Weka
-	#Step 7 - Record results for all genes (metric equation)
-	#Step 8 - Repeat x times
-	#Step 9 - Compute final metrics and report
+	
+	### STEP 6 - Run in Weka FIX THIS LATER
+	os.system("java weka.classifiers.trees.J48 -t " + filename + " -T " + filename + " -i > " + outfilename) 
+	
+	### STEP temp - Print results to report
+	#create report
+	report = "Weka output\n"
+	with open(outfilename) as f:
+		lines = f.readlines()
+		report+=str(lines)
+	f.close()
+	reportObj = {
+		'objects_created':[],
+		'text_message':report
+	}
+        #save report
+	provenance = [{}]
+	if 'provenance' in ctx:
+		provenance = ctx['provenance']
+	# add additional info to provenance here, in this case the input data object reference
+	provenance[0]['input_ws_objects']=[workspace_name+'/'+pan['id']]
+	report_info_list = None
+	try:
+        	report_info_list = wsClient.save_objects({
+                	'workspace':workspace_name,
+                	'objects':[
+			{
+                        	'type':'KBaseReport.Report',
+                        	'data':reportObj,
+                        	'name':'FS_report',
+                        	'meta':{},
+                         	'hidden':1, # important!  make sure the report is hidden
+                         	'provenance':provenance
+                        }
+			]
+			})
+	except:
+        	exc_type, exc_value, exc_traceback = sys.exc_info()
+        	lines = traceback.format_exception(exc_type, exc_value, exc_traceback)
+        	orig_error = ''.join('    ' + line for line in lines)
+        	raise ValueError('Error saving Report object to workspace:\n' + orig_error)
+	report_info = report_info_list[0]
+	print('saved report: ' + pformat(report_info))
+	
+	
+	### STEP 7 - Record results for all genes (metric equation)
+	### STEP 8 - Repeat x times
+	### STEP 9 - Compute final metrics and report
 
 	print('Size of Data: ' + str(len(Data)))
 	for i in range(0,4):
