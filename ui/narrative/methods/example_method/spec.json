@@ -45,21 +45,17 @@
                 },
                 {
                     "input_parameter": "classes",
-                    "target_argument_position": 0
+                    "target_argument_position": 1
                 },
 		{
 		    "input_parameter": "pangenome_ref",
-		    "target_argument_position": 0
+		    "target_argument_position": 2
 		}
             ],
             "output_mapping": [
                 {
                     "service_method_output_path": [0],
                     "target_property": "output"
-                },
-                {
-                    "input_parameter": "classes",
-                    "target_property": "input"
                 },
                 {
                     "narrative_system_variable": "workspace",
