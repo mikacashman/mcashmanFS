@@ -151,7 +151,7 @@ class mcashman_FS:
                          	'provenance':provenance
                         }
 			]
-			})
+		})
 	except:
         	exc_type, exc_value, exc_traceback = sys.exc_info()
         	lines = traceback.format_exception(exc_type, exc_value, exc_traceback)
@@ -172,7 +172,9 @@ class mcashman_FS:
 
 	print('Ready to return')
 	returnVal = {
-		'temp' : str(count)
+		'temp' : str(count),
+		'report_name':'FS_report',
+		'report_ref': str(report_info[6]) + '/' + str(report_info[0]) + '/' + str(report_info[4])
 	}
         # At some point might do deeper type checking...
         #if not isinstance(returnVal, dict):

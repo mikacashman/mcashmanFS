@@ -128,6 +128,8 @@ FSParams is a reference to a hash where the following keys are defined:
 	pangenome_ref has a value which is a string
 FSOutput is a reference to a hash where the following keys are defined:
 	temp has a value which is a string
+	report_name has a value which is a string
+	report_ref has a value which is a string
 
 </pre>
 
@@ -143,6 +145,8 @@ FSParams is a reference to a hash where the following keys are defined:
 	pangenome_ref has a value which is a string
 FSOutput is a reference to a hash where the following keys are defined:
 	temp has a value which is a string
+	report_name has a value which is a string
+	report_ref has a value which is a string
 
 
 =end text
@@ -311,6 +315,8 @@ pangenome_ref has a value which is a string
 <pre>
 a reference to a hash where the following keys are defined:
 temp has a value which is a string
+report_name has a value which is a string
+report_ref has a value which is a string
 
 </pre>
 
@@ -320,6 +326,8 @@ temp has a value which is a string
 
 a reference to a hash where the following keys are defined:
 temp has a value which is a string
+report_name has a value which is a string
+report_ref has a value which is a string
 
 
 =end text

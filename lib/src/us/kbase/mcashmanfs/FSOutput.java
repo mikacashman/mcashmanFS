@@ -19,12 +19,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("com.googlecode.jsonschema2pojo")
 @JsonPropertyOrder({
-    "temp"
+    "temp",
+    "report_name",
+    "report_ref"
 })
 public class FSOutput {
 
     @JsonProperty("temp")
     private String temp;
+    @JsonProperty("report_name")
+    private String reportName;
+    @JsonProperty("report_ref")
+    private String reportRef;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("temp")
@@ -42,6 +48,36 @@ public class FSOutput {
         return this;
     }
 
+    @JsonProperty("report_name")
+    public String getReportName() {
+        return reportName;
+    }
+
+    @JsonProperty("report_name")
+    public void setReportName(String reportName) {
+        this.reportName = reportName;
+    }
+
+    public FSOutput withReportName(String reportName) {
+        this.reportName = reportName;
+        return this;
+    }
+
+    @JsonProperty("report_ref")
+    public String getReportRef() {
+        return reportRef;
+    }
+
+    @JsonProperty("report_ref")
+    public void setReportRef(String reportRef) {
+        this.reportRef = reportRef;
+    }
+
+    public FSOutput withReportRef(String reportRef) {
+        this.reportRef = reportRef;
+        return this;
+    }
+
     @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
@@ -54,7 +90,7 @@ public class FSOutput {
 
     @Override
     public String toString() {
-        return ((((("FSOutput"+" [temp=")+ temp)+", additionalProperties=")+ additionalProperties)+"]");
+        return ((((((((("FSOutput"+" [temp=")+ temp)+", reportName=")+ reportName)+", reportRef=")+ reportRef)+", additionalProperties=")+ additionalProperties)+"]");
     }
 
 }

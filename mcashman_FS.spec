@@ -16,6 +16,8 @@ module mcashman_FS {
 
 	typedef structure{
 		string temp;
+		string report_name;
+		string report_ref;
 	}FSOutput;
 
 	funcdef FeatureSelection(FSParams params) returns (FSOutput) authentication required;

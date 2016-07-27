@@ -78,7 +78,7 @@ class mcashman_FSTest(unittest.TestCase):
 	#self.getWsClient().save_objects({'workspace': self.getWsName(), 'objects':
 	#	[{'type': 'KBaseGenomes.Pangenome', 'name': 'TestRhizo', 'data': json_data}]})
 	ret = self.getImpl().FeatureSelection(self.getContext(),{'workspace_name':'mikaelacashman:1469216639277',
-		'classes':[0,0,0,0], 'pangenome_ref':'TestOrthoRhizo'})
+		'classes':[0,0,0,0], 'pangenome_ref':'mikaelacashman:1469216639277/TestOrthoRhizo'})
 	print("Running asserts...")
 	self.assertEqual(ret[0]['temp'],'12660')
 	#pass
