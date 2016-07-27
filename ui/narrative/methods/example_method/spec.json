@@ -41,15 +41,16 @@
             "input_mapping": [
                 {
                     "narrative_system_variable": "workspace",
-                    "target_argument_position": 0
+                    "target_property": "workspace_name"
                 },
                 {
                     "input_parameter": "classes",
-                    "target_argument_position": 1
+                    "target_property": "classes"
                 },
 		{
 		    "input_parameter": "pangenome_ref",
-		    "target_argument_position": 2
+		    "target_property": "pangenome_ref",
+                    "target_type_transform": "ref"
 		}
             ],
             "output_mapping": [
