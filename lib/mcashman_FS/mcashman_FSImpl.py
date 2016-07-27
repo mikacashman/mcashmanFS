@@ -59,7 +59,7 @@ class mcashman_FS:
 	wsClient = workspaceService(self.workspaceURL, token=token)
 	try:
 		#why the 0th element?
-		pan = wsClient.get_objects([{'ref': workspace_name+'/'+pangenome}])[0]['data']
+		pan = wsClient.get_objects([{'ref': pangenome}])[0]['data']
 	except:
 		#idk what these do
 		exc_type, exc_value, exc_traceback = sys.exc_info()
