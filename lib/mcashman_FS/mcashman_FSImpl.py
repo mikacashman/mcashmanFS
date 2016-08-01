@@ -200,7 +200,7 @@ class mcashman_FS:
 	#	lines = f.readlines()
 	#	report+=str(lines)
 	#f.close()
-	for i in range(0,len(Genes)):
+	for i in range(0,count):
 		if sortedGenes[i][0] == 0: 
 			countR = i
 			break
