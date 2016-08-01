@@ -98,7 +98,7 @@ class mcashman_FS:
 	for i in range(0,len(pan['orthologs'])):
 		Index.append(i)
 
-	for k in range(0,100):	
+	for k in range(0,10):	
 		random.shuffle(Index)
 
 		### STEP 5 - Create Arff file
@@ -204,7 +204,9 @@ class mcashman_FS:
 		if sortedGenes[i][0] == 0: 
 			countR = i
 			break
-		report+=sortedGenes[i][1] + ": " + str(sortedGenes[i][0]) + '\n'
+		#tempI = pan['orthologs'].index(str(sortedGenes[i][1])['id'])
+		#report+=sortedGenes[i][1] + "(" + pan['orthologs'][tempI]['function'] + ") : " + str(sortedGenes[i][0]) + '\n'
+		report+=sortedGenes[i][1] + " : " + str(sortedGenes[i][0]) + '\n'
 	report+="Total Genes Ranked = " + str(countR) + " out of " + str(len(Genes)) + '\n'
 	print("count: " + str(countR)) 
 	
@@ -239,8 +241,8 @@ class mcashman_FS:
 		orig_error = ''.join('    ' + line for line in lines)
 		raise ValueError('Error saving Report object to workspace:\n' + orig_error)
 	report_info = report_info_list[0]
-	#print('saved report: ' + pformat(report_info))
-
+	print('saved report: ' + pformat(report_info))
+	print(report)
 
 	#print('Final Scores\n')
 	#for i in range(0,100):
