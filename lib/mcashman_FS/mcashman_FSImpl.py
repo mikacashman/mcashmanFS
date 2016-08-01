@@ -195,14 +195,19 @@ class mcashman_FS:
 
 	### STEP temp - Print results to report
 	#create report
-	report = "Ordered Genes\n-----------------------------"
+	report = "Ordered Genes\n-----------------------------\n"
 	#with open(outfilename) as f:
 	#	lines = f.readlines()
 	#	report+=str(lines)
 	#f.close()
 	for i in range(0,len(Genes)):
-		if sortedGenes[i][0] == 0: break
-		report+=sortedGenes[i][1] + ": " + str(sortedGenes[i][0])
+		if sortedGenes[i][0] == 0: 
+			countR = i
+			break
+		report+=sortedGenes[i][1] + ": " + str(sortedGenes[i][0]) + '\n'
+	report+="Total Genes Ranked = " + str(countR) + " out of " + str(len(Genes)) + '\n'
+	print("count: " + str(countR)) 
+	
 	reportObj = {
 		'objects_created':[],
 		'text_message':report
