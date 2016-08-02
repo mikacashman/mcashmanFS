@@ -79,13 +79,12 @@ class mcashman_FS:
 	Functions = [] #gene functions
 	Scores = [] #Scores
 	temp = 0
-	for i in range(0,len(pan['orthologs'])):
-		Scores.append(0)
 	for i in range(0,len(pan['genome_refs'])):
 		Strains.append(pan['genome_refs'][i])
 		print(Strains[i])
 	for i in range(0,len(pan['orthologs'])): #for each gene
 		count+=1
+		Scores.append(0)
 		Genes.append(pan['orthologs'][i]['id'])
 		Functions.append(pan['orthologs'][i]['function'])
 		for j in range(0,len(pan['orthologs'][i]['orthologs'])):#for each instance of gene
@@ -97,8 +96,8 @@ class mcashman_FS:
 	Index=[]
 	for i in range(0,len(pan['orthologs'])):
 		Index.append(i)
-
-	for k in range(0,10):	
+	
+	for k in range(0,10):#loop for running in Weka x  times	
 		random.shuffle(Index)
 
 		### STEP 5 - Create Arff file
@@ -125,53 +124,8 @@ class mcashman_FS:
 		### STEP 6 - Run in Weka FIX THIS LATER
 		os.system("java weka.classifiers.trees.J48 -t " + filename + " -T " + filename + " -i > " + outfilename) 
 		
-		### STEP temp - Print results to report
-		#create report
-		#report = "Weka output\n"
-		#with open(outfilename) as f:
-		#	lines = f.readlines()
-		#	report+=str(lines)
-		#f.close()
-		#reportObj = {
-		#	'objects_created':[],
-		#	'text_message':report
-		#}
-		#save report
-		#provenance = [{}]
-		#if 'provenance' in ctx:
-		#	provenance = ctx['provenance']
-		# add additional info to provenance here, in this case the input data object reference
-		#provenance[0]['input_ws_objects']=[workspace_name+'/'+pan['id']]
-		#report_info_list = None
-		#try:
-		#	report_info_list = wsClient.save_objects({
-		#		'workspace':workspace_name,
-		#		'objects':[
-		#		{
-		#			'type':'KBaseReport.Report',
-		#			'data':reportObj,
-		#			'name':'FS_report',
-		#			'meta':{},
-		#			'hidden':1, # important!  make sure the report is hidden
-		#			'provenance':provenance
-		#		}
-		#		]
-		#	})
-		#except:
-		#	exc_type, exc_value, exc_traceback = sys.exc_info()
-		#	lines = traceback.format_exception(exc_type, exc_value, exc_traceback)
-		#	orig_error = ''.join('    ' + line for line in lines)
-		#	raise ValueError('Error saving Report object to workspace:\n' + orig_error)
-		#report_info = report_info_list[0]
-		#print('saved report: ' + pformat(report_info))
-		
-		
 		### STEP 7 - Record results for all genes (metric equation)
 		#parse file and add 1 to cluster if present
-		#f = open(outfilename,'r')
-		#while True:
-		#	ch=f.read(1)
-		#	if not ch: break
 		with open(outfilename,'r') as f:
 			f = file(outfilename).read()
 			for word in f.split():
@@ -188,14 +142,15 @@ class mcashman_FS:
 	ScoreGene = zip(Scores,Genes)
 	sortedGenes = sorted(ScoreGene, key = lambda pair: pair[0], reverse=True)
 	
-	for i in range(0,len(Genes)):
+	for i in range(0,count):
 		if sortedGenes[i][0] == 0: break
-		print(sortedGenes[i][1] + ": " + str(sortedGenes[i][0]))
+		tempI = Genes.index(sortedGenes[i][1])
+		print(str(sortedGenes[i][0]) + " : " + sortedGenes[i][1] + " (" + Functions[tempI] + ")")
 	#[x for (y,x) in sorted(zip(Scores,Genes), key = lambda pair: pair[0])]
 
 	### STEP temp - Print results to report
 	#create report
-	report = "Ordered Genes\n-----------------------------\n"
+	report = "Ordered Genes\n-----------------------------\nScore   Cluster (Function)\n-----   ------------------\n"
 	#with open(outfilename) as f:
 	#	lines = f.readlines()
 	#	report+=str(lines)
@@ -206,7 +161,9 @@ class mcashman_FS:
 			break
 		#tempI = pan['orthologs'].index(str(sortedGenes[i][1])['id'])
 		#report+=sortedGenes[i][1] + "(" + pan['orthologs'][tempI]['function'] + ") : " + str(sortedGenes[i][0]) + '\n'
-		report+=sortedGenes[i][1] + " : " + str(sortedGenes[i][0]) + '\n'
+		tempI = Genes.index(sortedGenes[i][1])
+		report+=str(sortedGenes[i][0]) + " : " + sortedGenes[i][1] + " (" + Functions[tempI] + ")" + '\n'
+	report+="-----------------------------\n"
 	report+="Total Genes Ranked = " + str(countR) + " out of " + str(len(Genes)) + '\n'
 	print("count: " + str(countR)) 
 	
