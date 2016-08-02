@@ -97,7 +97,7 @@ class mcashman_FS:
 	for i in range(0,len(pan['orthologs'])):
 		Index.append(i)
 	
-	for k in range(0,10):#loop for running in Weka x  times	
+	for k in range(0,100):#loop for running in Weka x  times	
 		random.shuffle(Index)
 
 		### STEP 5 - Create Arff file
