@@ -31,9 +31,41 @@
             "text_options": {
                 "valid_ws_types": [ "KBaseGenomes.Pangenome" ]
             }
-        }
-    ],
-    "behavior": {
+        },
+	{
+	    "id" : "genomes",
+ 	    "field_type" : "textsubdata",
+            "allow_multiple" : true,
+            "optional" : false,
+            "textsubdata_options" : {
+               "show_src_obj" : true,
+               "allow_custom" : true,
+               "multiselection" : false,
+               "subdata_selection" : {
+                  "subdata_included" : [
+                     "genome_refs/[*]"
+                  ],
+                  "selection_description" : [
+                     "name"
+                  ],
+                  "selection_id" : "",
+                  "path_to_subdata" : [
+                     "genome_refs"
+                  ],
+                  "parameter_id" : "pangenome_ref",
+                  "description_template" : ""
+               }
+            },
+            "text_options" : {
+               "valid_ws_types" : []
+            },
+            "advanced" : false,
+            "default_values" : [
+               ""
+	    ]
+	 }
+	 ],
+   "behavior" : {
         "service-mapping": {
             "url": "",
             "name": "mcashman_FS",

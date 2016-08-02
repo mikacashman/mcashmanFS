@@ -43,7 +43,13 @@ parameters :
             Pangenome
         long-hint  : |
             Pangenome
-
+    genomes :
+        ui-name : |
+            Genomes
+        short-hint : |
+            Order for genomes
+        long-hint : |
+            The order of the genomes in which you will input the classes.
 
 
 description : |
