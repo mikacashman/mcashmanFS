@@ -143,7 +143,13 @@ class mcashman_FS:
 		### STEP 6 - Run in Weka FIX THIS LATER
 		print("Running Weka")
 		os.system("java weka.classifiers.trees.J48 -t " + filename + " -T " + filename + " -i > " + outfilename) 
+		print("java weka.classifiers.trees.J48 -t " + filename + " -T " + filename + " -i > " + outfilename) 
+		outfilepresent = os.path.isfile(outfilename)
+		print("OutFile present?: " + str(outfilepresent))
+		print("OutFile Path: " + outfilename)
+		print("Size of outfile: " + str(os.path.getsize(outfilename)))
 		
+	
 		### STEP 7 - Record results for all genes (metric equation)
 		#parse file and add 1 to cluster if present
 		print("Tree-----")
