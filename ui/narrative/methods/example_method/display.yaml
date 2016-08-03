@@ -36,20 +36,22 @@ parameters :
             Pangenome
         long-hint  : |
             Pangenome
+    
     genomes :
         ui-name : |
             Genomes
         short-hint : |
             Order for genomes
         long-hint : |
-            The order of the genomes in which you will input the classes.
-     classes :
+            The order of the genomes in which you will input the classes
+   
+    classes :
         ui-name : |
             Classes
         short-hint : |
             Class labels
         long-hint  : |
-            A list of the class labels, one for each genome.
+            A list of the class labels, one for each genome
   
 
 description : |
