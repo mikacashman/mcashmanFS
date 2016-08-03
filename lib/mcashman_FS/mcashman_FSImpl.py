@@ -127,6 +127,7 @@ class mcashman_FS:
 					arff.write("ON,")
 				else:
 					arff.write("OFF,")
+			print("IF " + str(ClassesOrdered[i]) + " = 1 => " + str(ClassesOrdered[i]==1))
 			if ClassesOrdered[i] == 1:
 				arff.write("GROWTH\n")
 			else:
