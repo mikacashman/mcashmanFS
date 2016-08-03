@@ -118,6 +118,9 @@ class mcashman_FS:
 			arff.write("@ATTRIBUTE " + Genes[Index[i]] + " {ON,OFF}\n")
 		arff.write("@ATTRIBUTE class {GROWTH,NO_GROWTH}\n")
 		arff.write("\n@data\n")
+		print("Testing Order")
+		for i in range(0,len(pan['genome_refs'])):
+			print(Strains[i] + " - " + str(ClassesOrdered[i]))
 		for i in range(0,len(pan['genome_refs'])):
 			for j in range(0,len(pan['orthologs'])):
 				if Data[Index[j]][i] == 1:
