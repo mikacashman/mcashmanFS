@@ -130,10 +130,13 @@ class mcashman_FS:
 				arff.write("NO_GROWTH\n") 
 		arff.close()
 		print("ARFF")
-		with open(filename,'r') as f:
-			f = file(filename).read()
-			for word in f.split():
-				print(word)
+		filepresent = os.path.isfile(filename)
+		print("File present?: " + str(filepresent))
+		print("File Path: " + filename)
+		#with open(filename,'r') as f:
+		#	f = file(filename).read()
+		#	for word in f.split():
+		#		print(word)
 		
 		
 		### STEP 6 - Run in Weka FIX THIS LATER
