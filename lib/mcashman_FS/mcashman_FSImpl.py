@@ -133,6 +133,7 @@ class mcashman_FS:
 		filepresent = os.path.isfile(filename)
 		print("File present?: " + str(filepresent))
 		print("File Path: " + filename)
+		print("Size of file: " + str(os.path.getsize(filename)))
 		#with open(filename,'r') as f:
 		#	f = file(filename).read()
 		#	for word in f.split():
