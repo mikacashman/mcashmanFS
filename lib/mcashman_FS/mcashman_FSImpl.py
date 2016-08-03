@@ -134,10 +134,11 @@ class mcashman_FS:
 		print("File present?: " + str(filepresent))
 		print("File Path: " + filename)
 		print("Size of file: " + str(os.path.getsize(filename)))
-		with open(filename,'r') as t:
-			t = file(filename).read()
-			for word in t.split():
-				print(word)
+		os.system("tail -n 4 " + filename)
+		#with open(filename,'r') as t:
+		#	t = file(filename).read()
+		#	for word in t.split():
+		#		print(word)
 		
 		
 		### STEP 6 - Run in Weka FIX THIS LATER
