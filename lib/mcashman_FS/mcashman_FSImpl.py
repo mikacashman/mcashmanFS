@@ -101,6 +101,9 @@ class mcashman_FS:
 	Index=[]
 	for i in range(0,len(pan['orthologs'])):
 		Index.append(i)
+
+	print("Size of genomes: " + str(len(Strains)))
+	print("Size of genes: " + str(len(Genes)))
 	
 	for k in range(0,10):#loop for running in Weka x  times	
 		print("Run " + str(k))
@@ -112,7 +115,7 @@ class mcashman_FS:
 		arff = open(filename,"w+")
 		arff.write("@RELATION FS\n\n")
 		for i in range(0,len(pan['orthologs'])):
-			arff.write("@ATTRIBUTE " + Genes[Index[i]] + "{ON,OFF}\n")
+			arff.write("@ATTRIBUTE " + Genes[Index[i]] + " {ON,OFF}\n")
 		arff.write("@ATTRIBUTE class {GROWTH,NO_GROWTH}\n")
 		arff.write("\n@data\n")
 		for i in range(0,len(pan['genome_refs'])):
@@ -126,6 +129,12 @@ class mcashman_FS:
 			else:
 				arff.write("NO_GROWTH\n") 
 		arff.close()
+		print("ARFF")
+		#with open(filename,'r') as f:
+		#	f = file(filename).read()
+		#	for word in f.split():
+		#		print(word)
+		
 		
 		### STEP 6 - Run in Weka FIX THIS LATER
 		print("Running Weka")
@@ -137,6 +146,7 @@ class mcashman_FS:
 		with open(outfilename,'r') as f:
 			f = file(outfilename).read()
 			for word in f.split():
+				print(word)
 				if word[0:7]=='cluster':
 					print("     Att: " + word)
 					temp = Genes.index(word)
