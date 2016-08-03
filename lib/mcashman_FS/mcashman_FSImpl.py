@@ -103,6 +103,7 @@ class mcashman_FS:
 		Index.append(i)
 	
 	for k in range(0,10):#loop for running in Weka x  times	
+		print("Run " + str(k))
 		random.shuffle(Index)
 
 		### STEP 5 - Create Arff file
@@ -127,15 +128,17 @@ class mcashman_FS:
 		arff.close()
 		
 		### STEP 6 - Run in Weka FIX THIS LATER
+		print("Running Weka")
 		os.system("java weka.classifiers.trees.J48 -t " + filename + " -T " + filename + " -i > " + outfilename) 
 		
 		### STEP 7 - Record results for all genes (metric equation)
 		#parse file and add 1 to cluster if present
+		print("Tree-----")
 		with open(outfilename,'r') as f:
 			f = file(outfilename).read()
 			for word in f.split():
 				if word[0:7]=='cluster':
-					print(word)
+					print("     Att: " + word)
 					temp = Genes.index(word)
 					Scores[temp]+=1
 				elif word=='Number': break
