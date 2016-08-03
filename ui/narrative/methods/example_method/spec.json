@@ -10,17 +10,6 @@
         "output": "no-display"
     },
     "parameters": [ 
-        {
-            "id": "classes",
-            "optional": false,
-            "advanced": false,
-            "allow_multiple": true,
-            "default_values": [ "" ],
-            "field_type": "text",
-            "text_options": {
-                "validate_as": "int"
-            }
-        },
 	{
             "id": "pangenome_ref",
             "optional": false,
@@ -63,8 +52,19 @@
             "default_values" : [
                ""
 	    ]
-	 }
-	 ],
+	 },
+  	 {
+            "id": "classes",
+            "optional": false,
+            "advanced": false,
+            "allow_multiple": true,
+            "default_values": [ "" ],
+            "field_type": "text",
+            "text_options": {
+                "validate_as": "int"
+            }
+          }
+	  ],
    "behavior" : {
         "service-mapping": {
             "url": "",
@@ -83,6 +83,10 @@
 		    "input_parameter": "pangenome_ref",
 		    "target_property": "pangenome_ref",
                     "target_type_transform": "ref"
+		},
+		{
+		    "input_parameter": "genomes",
+		    "target_property": "genomes"
 		}
 	    ],
             "output_mapping": [

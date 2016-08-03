@@ -78,10 +78,15 @@ class mcashman_FS:
 	Genes = [] #gene names
 	Functions = [] #gene functions
 	Scores = [] #Scores
+	ClassesOrdered = [] #classes from user matched to pangenome
 	temp = 0
 	for i in range(0,len(pan['genome_refs'])):
 		Strains.append(pan['genome_refs'][i])
-		print(Strains[i])
+		ClassesOrdered.append(0)
+	for i in range(0,len(pan['genome_refs'])):
+		ClassesOrdered[Strains.index(params['genomes'][i])] = params['classes'][i]
+	for i in range(0,len(pan['genome_refs'])):
+		print(Strains[i] + " - " + str(ClassesOrdered[i]))
 	for i in range(0,len(pan['orthologs'])): #for each gene
 		count+=1
 		Scores.append(0)
@@ -97,7 +102,7 @@ class mcashman_FS:
 	for i in range(0,len(pan['orthologs'])):
 		Index.append(i)
 	
-	for k in range(0,100):#loop for running in Weka x  times	
+	for k in range(0,10):#loop for running in Weka x  times	
 		random.shuffle(Index)
 
 		### STEP 5 - Create Arff file
@@ -115,7 +120,7 @@ class mcashman_FS:
 					arff.write("ON,")
 				else:
 					arff.write("OFF,")
-			if params['classes'][i] == 1:
+			if ClassesOrdered[i] == 1:
 				arff.write("GROWTH\n")
 			else:
 				arff.write("NO_GROWTH\n") 
@@ -130,7 +135,7 @@ class mcashman_FS:
 			f = file(outfilename).read()
 			for word in f.split():
 				if word[0:7]=='cluster':
-					#print(word)
+					print(word)
 					temp = Genes.index(word)
 					Scores[temp]+=1
 				elif word=='Number': break

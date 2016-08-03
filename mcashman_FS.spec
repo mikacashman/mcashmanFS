@@ -10,8 +10,9 @@ module mcashman_FS {
 	
 	typedef structure{
 		string workspace_name;
-		list <int> classes;
 		string pangenome_ref;
+		list <string> genomes;
+		list <int> classes;
 	}FSParams;
 
 	typedef structure{

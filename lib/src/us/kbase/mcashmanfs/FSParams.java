@@ -23,31 +23,64 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @Generated("com.googlecode.jsonschema2pojo")
 @JsonPropertyOrder({
     "workspace_name",
-    "classes",
-    "pangenome_ref"
+    "pangenome_ref",
+    "genomes",
+    "classes"
 })
 public class FSParams {
 
     @JsonProperty("workspace_name")
-    private String workspaceName;
+    private java.lang.String workspaceName;
+    @JsonProperty("pangenome_ref")
+    private java.lang.String pangenomeRef;
+    @JsonProperty("genomes")
+    private List<String> genomes;
     @JsonProperty("classes")
     private List<Long> classes;
-    @JsonProperty("pangenome_ref")
-    private String pangenomeRef;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<java.lang.String, Object> additionalProperties = new HashMap<java.lang.String, Object>();
 
     @JsonProperty("workspace_name")
-    public String getWorkspaceName() {
+    public java.lang.String getWorkspaceName() {
         return workspaceName;
     }
 
     @JsonProperty("workspace_name")
-    public void setWorkspaceName(String workspaceName) {
+    public void setWorkspaceName(java.lang.String workspaceName) {
         this.workspaceName = workspaceName;
     }
 
-    public FSParams withWorkspaceName(String workspaceName) {
+    public FSParams withWorkspaceName(java.lang.String workspaceName) {
         this.workspaceName = workspaceName;
+        return this;
+    }
+
+    @JsonProperty("pangenome_ref")
+    public java.lang.String getPangenomeRef() {
+        return pangenomeRef;
+    }
+
+    @JsonProperty("pangenome_ref")
+    public void setPangenomeRef(java.lang.String pangenomeRef) {
+        this.pangenomeRef = pangenomeRef;
+    }
+
+    public FSParams withPangenomeRef(java.lang.String pangenomeRef) {
+        this.pangenomeRef = pangenomeRef;
+        return this;
+    }
+
+    @JsonProperty("genomes")
+    public List<String> getGenomes() {
+        return genomes;
+    }
+
+    @JsonProperty("genomes")
+    public void setGenomes(List<String> genomes) {
+        this.genomes = genomes;
+    }
+
+    public FSParams withGenomes(List<String> genomes) {
+        this.genomes = genomes;
         return this;
     }
 
@@ -66,34 +99,19 @@ public class FSParams {
         return this;
     }
 
-    @JsonProperty("pangenome_ref")
-    public String getPangenomeRef() {
-        return pangenomeRef;
-    }
-
-    @JsonProperty("pangenome_ref")
-    public void setPangenomeRef(String pangenomeRef) {
-        this.pangenomeRef = pangenomeRef;
-    }
-
-    public FSParams withPangenomeRef(String pangenomeRef) {
-        this.pangenomeRef = pangenomeRef;
-        return this;
-    }
-
     @JsonAnyGetter
-    public Map<String, Object> getAdditionalProperties() {
+    public Map<java.lang.String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
 
     @JsonAnySetter
-    public void setAdditionalProperties(String name, Object value) {
+    public void setAdditionalProperties(java.lang.String name, Object value) {
         this.additionalProperties.put(name, value);
     }
 
     @Override
-    public String toString() {
-        return ((((((((("FSParams"+" [workspaceName=")+ workspaceName)+", classes=")+ classes)+", pangenomeRef=")+ pangenomeRef)+", additionalProperties=")+ additionalProperties)+"]");
+    public java.lang.String toString() {
+        return ((((((((((("FSParams"+" [workspaceName=")+ workspaceName)+", pangenomeRef=")+ pangenomeRef)+", genomes=")+ genomes)+", classes=")+ classes)+", additionalProperties=")+ additionalProperties)+"]");
     }
 
 }

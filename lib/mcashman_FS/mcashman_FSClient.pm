@@ -124,8 +124,9 @@ $params is a mcashman_FS.FSParams
 $return is a mcashman_FS.FSOutput
 FSParams is a reference to a hash where the following keys are defined:
 	workspace_name has a value which is a string
-	classes has a value which is a reference to a list where each element is an int
 	pangenome_ref has a value which is a string
+	genomes has a value which is a reference to a list where each element is a string
+	classes has a value which is a reference to a list where each element is an int
 FSOutput is a reference to a hash where the following keys are defined:
 	temp has a value which is a string
 	report_name has a value which is a string
@@ -141,8 +142,9 @@ $params is a mcashman_FS.FSParams
 $return is a mcashman_FS.FSOutput
 FSParams is a reference to a hash where the following keys are defined:
 	workspace_name has a value which is a string
-	classes has a value which is a reference to a list where each element is an int
 	pangenome_ref has a value which is a string
+	genomes has a value which is a reference to a list where each element is a string
+	classes has a value which is a reference to a list where each element is an int
 FSOutput is a reference to a hash where the following keys are defined:
 	temp has a value which is a string
 	report_name has a value which is a string
@@ -281,8 +283,9 @@ Insert your typespec information here.
 <pre>
 a reference to a hash where the following keys are defined:
 workspace_name has a value which is a string
-classes has a value which is a reference to a list where each element is an int
 pangenome_ref has a value which is a string
+genomes has a value which is a reference to a list where each element is a string
+classes has a value which is a reference to a list where each element is an int
 
 </pre>
 
@@ -292,8 +295,9 @@ pangenome_ref has a value which is a string
 
 a reference to a hash where the following keys are defined:
 workspace_name has a value which is a string
-classes has a value which is a reference to a list where each element is an int
 pangenome_ref has a value which is a string
+genomes has a value which is a reference to a list where each element is a string
+classes has a value which is a reference to a list where each element is an int
 
 
 =end text
