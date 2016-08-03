@@ -29,13 +29,6 @@ suggestions:
 # Configure the display and description of parameters
 #
 parameters :
-    classes :
-        ui-name : |
-            Classes
-        short-hint : |
-            Class labels
-        long-hint  : |
-            A list of the class labels, one for each genome.
     pangenome_ref :
         ui-name : |
             Pangenome
@@ -50,7 +43,14 @@ parameters :
             Order for genomes
         long-hint : |
             The order of the genomes in which you will input the classes.
-
+     classes :
+        ui-name : |
+            Classes
+        short-hint : |
+            Class labels
+        long-hint  : |
+            A list of the class labels, one for each genome.
+  
 
 description : |
     <p>App runs Weka J48 decision tree classifier on a pangenome.  Attributes are the genes and the classes are defined by the user (e.g. Growth).  Testing is currently preformed on complete dataSet as to evaluate the attribute choices.  This app should be used for feature selection and NOT for classification.</p>
