@@ -134,11 +134,14 @@ class mcashman_FS:
 		print("File present?: " + str(filepresent))
 		print("File Path: " + filename)
 		print("Size of file: " + str(os.path.getsize(filename)))
-		os.system("tail -n 4 " + filename)
-		#with open(filename,'r') as t:
-		#	t = file(filename).read()
-		#	for word in t.split():
-		#		print(word)
+		#os.system("tail -n 4 " + filename)
+		tempC = 0
+		with open(filename,'r') as t:
+			#t = file(filename).read()
+			for line in t:
+				if tempC>12663:	
+					print(line[-10:])
+				tempC+=1
 		
 		
 		### STEP 6 - Run in Weka FIX THIS LATER
