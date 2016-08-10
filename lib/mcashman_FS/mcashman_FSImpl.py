@@ -97,6 +97,22 @@ class mcashman_FS:
 			temp = Strains.index(pan['orthologs'][i]['orthologs'][j][2])
 			Data[i][temp] = 1 #+=1 for numeric ---- =1 for binary
 		
+	### STEP temp - Print matrix to a file
+	matfilename = self.scratch + "/matrix.txt"
+	matrixFile = open(matfilename,"w+")
+	funcfilename = self.scratch + "/funcs.txt"
+	funcFile = open(funcfilename,"w+")
+	for i in range(0,len(pan['genome_refs'])):
+		matrixFile.write(Strains[i])
+	for i in range(0,len(pan['orthologs'])):
+		matrixFile.write(Genes[i])
+		for j in range(0,len(pan['genome_refs'])):
+			matrixFile.write(" " + str(Data[i][j]))
+		matrixFile.write('\n')
+		funcFile.write(Functions[i] + '\n')
+	matrixFile.close()	
+	funcFile.close()
+
 	### STEP 4 - Create random list of indices
 	Index=[]
 	for i in range(0,len(pan['orthologs'])):
@@ -116,57 +132,59 @@ class mcashman_FS:
 		arff.write("@RELATION FS\n\n")
 		for i in range(0,len(pan['orthologs'])):
 			arff.write("@ATTRIBUTE " + Genes[Index[i]] + " {ON,OFF}\n")
-		arff.write("@ATTRIBUTE class {GROWTH,NO_GROWTH}\n")
+		arff.write("@ATTRIBUTE class {WT,THICK,HAIRY,THICK-HAIRY}\n")
 		arff.write("\n@data\n")
-		print("Testing Order")
-		for i in range(0,len(pan['genome_refs'])):
-			print(Strains[i] + " - " + str(ClassesOrdered[i]))
+		#print("Testing Order")
+		#for i in range(0,len(pan['genome_refs'])):
+		#	print(Strains[i] + " - " + str(ClassesOrdered[i]))
 		for i in range(0,len(pan['genome_refs'])):
 			for j in range(0,len(pan['orthologs'])):
 				if Data[Index[j]][i] == 1:
 					arff.write("ON,")
 				else:
 					arff.write("OFF,")
-			print("IF " + str(ClassesOrdered[i]) + " = 1 => " + str(ClassesOrdered[i]==1))
-			if ClassesOrdered[i] == 1:
-				arff.write("GROWTH\n")
-			else:
-				arff.write("NO_GROWTH\n") 
+			#print("IF " + str(ClassesOrdered[i]) + " = 1 => " + str(ClassesOrdered[i]==1))
+			arff.write(ClassesOrdered[i])
+			arff.write('\n')
+			#if ClassesOrdered[i] == 1:
+			#	arff.write("GROWTH\n")
+			#else:
+			#	arff.write("NO_GROWTH\n") 
 		arff.close()
-		print("ARFF")
+		#print("ARFF")
 		filepresent = os.path.isfile(filename)
-		print("File present?: " + str(filepresent))
-		print("File Path: " + filename)
-		print("Size of file: " + str(os.path.getsize(filename)))
+		#print("File present?: " + str(filepresent))
+		#print("File Path: " + filename)
+		#print("Size of file: " + str(os.path.getsize(filename)))
 		#os.system("tail -n 4 " + filename)
 		tempC = 0
-		with open(filename,'r') as t:
+		#with open(filename,'r') as t:
 			#t = file(filename).read()
-			for line in t:
-				if tempC>12663:	
-					print(line[-10:])
-				tempC+=1
+		#	for line in t:
+		#		if tempC>12663:	
+		#			print(line[-10:])
+		#		tempC+=1
 		
 		
 		### STEP 6 - Run in Weka FIX THIS LATER
-		print("Running Weka")
+		#print("Running Weka")
 		os.system("java weka.classifiers.trees.J48 -t " + filename + " -T " + filename + " -i > " + outfilename) 
-		print("java weka.classifiers.trees.J48 -t " + filename + " -T " + filename + " -i > " + outfilename) 
+		#print("java weka.classifiers.trees.J48 -t " + filename + " -T " + filename + " -i > " + outfilename) 
 		outfilepresent = os.path.isfile(outfilename)
-		print("OutFile present?: " + str(outfilepresent))
-		print("OutFile Path: " + outfilename)
-		print("Size of outfile: " + str(os.path.getsize(outfilename)))
+		#print("OutFile present?: " + str(outfilepresent))
+		#print("OutFile Path: " + outfilename)
+		#print("Size of outfile: " + str(os.path.getsize(outfilename)))
 		
 	
 		### STEP 7 - Record results for all genes (metric equation)
 		#parse file and add 1 to cluster if present
-		print("Tree-----")
+		#print("Tree-----")
 		with open(outfilename,'r') as f:
 			f = file(outfilename).read()
 			for word in f.split():
-				print(word)
+				#print(word)
 				if word[0:7]=='cluster':
-					print("     Att: " + word)
+					#print("     Att: " + word)
 					temp = Genes.index(word)
 					Scores[temp]+=1
 				elif word=='Number': break
@@ -181,7 +199,7 @@ class mcashman_FS:
 	for i in range(0,count):
 		if sortedGenes[i][0] == 0: break
 		tempI = Genes.index(sortedGenes[i][1])
-		print(str(sortedGenes[i][0]) + " : " + sortedGenes[i][1] + " (" + Functions[tempI] + ")")
+		#print(str(sortedGenes[i][0]) + " : " + sortedGenes[i][1] + " (" + Functions[tempI] + ")")
 	#[x for (y,x) in sorted(zip(Scores,Genes), key = lambda pair: pair[0])]
 
 	### STEP temp - Print results to report

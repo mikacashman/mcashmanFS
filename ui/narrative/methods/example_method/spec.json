@@ -61,7 +61,7 @@
             "default_values": [ "" ],
             "field_type": "text",
             "text_options": {
-                "validate_as": "int"
+                "validate_as": "string"
             }
           }
 	  ],
