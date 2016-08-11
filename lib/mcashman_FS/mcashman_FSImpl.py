@@ -205,7 +205,7 @@ class mcashman_FS:
 	### STEP temp - Print results to report
 	#create report
 	#report = "Ordered Genes\n-----------------------------\nScore   Cluster (Function)\n-----   ------------------\n"
-	report = "<table border="1"\n"
+	report = "<table border=1>\n"
 	report+= " <tr>\n"
 	report+= "  <th>Score</th>\n"
 	report+= "  <th>Cluster (Function)</th>\n </tr>"
