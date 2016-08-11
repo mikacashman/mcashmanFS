@@ -205,7 +205,12 @@ class mcashman_FS:
 	### STEP temp - Print results to report
 	#create report
 	report = "Testing HTML\n"
+	report+= "<!DOCTYPE html>"
+	report+= "<html>"
+	report+= "<body>"
 	report+= "<b>Ordered Genes</b>"
+	report+= "</head>"
+	report+= "</html>"
 	report+= "\n-----------------------------\nScore   Cluster (Function)\n-----   ------------------\n"
 	#report = "<table border=1>"
 	#report+= " <tr>"
