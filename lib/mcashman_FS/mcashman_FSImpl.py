@@ -204,16 +204,17 @@ class mcashman_FS:
 
 	### STEP temp - Print results to report
 	#create report
-	#report = "Ordered Genes\n-----------------------------\nScore   Cluster (Function)\n-----   ------------------\n"
-	report = "<table border=1>"
-	report+= " <tr>"
-	report+= "  <th>Score</th>"
-	report+= "  <th>Cluster (Function)</th> </tr>"
-	report+= " <tr>"
-	report+= "  <td>A</td>"
-	report+= "  <td>Something</td>"
-	report+= " </tr>"
-	report+= "</table>"
+	report = "<b>Ordered Genes<\b>"
+	report+= "\n-----------------------------\nScore   Cluster (Function)\n-----   ------------------\n"
+	#report = "<table border=1>"
+	#report+= " <tr>"
+	#report+= "  <th>Score</th>"
+	#report+= "  <th>Cluster (Function)</th> </tr>"
+	#report+= " <tr>"
+	#report+= "  <td>A</td>"
+	#report+= "  <td>Something</td>"
+	#report+= " </tr>"
+	#report+= "</table>"
 	#with open(outfilename) as f:
 	#	lines = f.readlines()
 	#	report+=str(lines)
