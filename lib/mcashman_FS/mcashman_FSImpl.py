@@ -35,7 +35,7 @@ class mcashman_FS:
         #BEGIN_CONSTRUCTOR
         self.workspaceURL = config['workspace-url']
 	self.scratch = config['scratch']
-	#END_CONSTRUCTOR
+        #END_CONSTRUCTOR
         pass
 
     def FeatureSelection(self, ctx, params):
@@ -292,4 +292,11 @@ class mcashman_FS:
         #                     'returnVal is not type dict as required.')
         # return the results
         return [returnVal]
-	#END FeatureSelection
+        #END FeatureSelection
+
+        # At some point might do deeper type checking...
+        if not isinstance(returnVal, dict):
+            raise ValueError('Method FeatureSelection return value ' +
+                             'returnVal is not type dict as required.')
+        # return the results
+        return [returnVal]

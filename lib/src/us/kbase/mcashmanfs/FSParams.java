@@ -25,7 +25,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "workspace_name",
     "pangenome_ref",
     "genomes",
-    "classes"
+    "classes",
+    "runCount"
 })
 public class FSParams {
 
@@ -36,7 +37,9 @@ public class FSParams {
     @JsonProperty("genomes")
     private List<String> genomes;
     @JsonProperty("classes")
-    private List<Long> classes;
+    private List<String> classes;
+    @JsonProperty("runCount")
+    private Long runCount;
     private Map<java.lang.String, Object> additionalProperties = new HashMap<java.lang.String, Object>();
 
     @JsonProperty("workspace_name")
@@ -85,17 +88,32 @@ public class FSParams {
     }
 
     @JsonProperty("classes")
-    public List<Long> getClasses() {
+    public List<String> getClasses() {
         return classes;
     }
 
     @JsonProperty("classes")
-    public void setClasses(List<Long> classes) {
+    public void setClasses(List<String> classes) {
         this.classes = classes;
     }
 
-    public FSParams withClasses(List<Long> classes) {
+    public FSParams withClasses(List<String> classes) {
         this.classes = classes;
+        return this;
+    }
+
+    @JsonProperty("runCount")
+    public Long getRunCount() {
+        return runCount;
+    }
+
+    @JsonProperty("runCount")
+    public void setRunCount(Long runCount) {
+        this.runCount = runCount;
+    }
+
+    public FSParams withRunCount(Long runCount) {
+        this.runCount = runCount;
         return this;
     }
 
@@ -111,7 +129,7 @@ public class FSParams {
 
     @Override
     public java.lang.String toString() {
-        return ((((((((((("FSParams"+" [workspaceName=")+ workspaceName)+", pangenomeRef=")+ pangenomeRef)+", genomes=")+ genomes)+", classes=")+ classes)+", additionalProperties=")+ additionalProperties)+"]");
+        return ((((((((((((("FSParams"+" [workspaceName=")+ workspaceName)+", pangenomeRef=")+ pangenomeRef)+", genomes=")+ genomes)+", classes=")+ classes)+", runCount=")+ runCount)+", additionalProperties=")+ additionalProperties)+"]");
     }
 
 }
