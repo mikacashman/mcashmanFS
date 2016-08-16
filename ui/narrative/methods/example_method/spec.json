@@ -98,6 +98,10 @@
 		{
 		    "input_parameter": "genomes",
 		    "target_property": "genomes"
+		},
+		{
+		    "input_parameter": "runCount",
+		    "target_property": "runCount"
 		}
 	    ],
             "output_mapping": [

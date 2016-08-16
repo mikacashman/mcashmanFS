@@ -126,7 +126,8 @@ FSParams is a reference to a hash where the following keys are defined:
 	workspace_name has a value which is a string
 	pangenome_ref has a value which is a string
 	genomes has a value which is a reference to a list where each element is a string
-	classes has a value which is a reference to a list where each element is an int
+	classes has a value which is a reference to a list where each element is a string
+	runCount has a value which is an int
 FSOutput is a reference to a hash where the following keys are defined:
 	temp has a value which is a string
 	report_name has a value which is a string
@@ -144,7 +145,8 @@ FSParams is a reference to a hash where the following keys are defined:
 	workspace_name has a value which is a string
 	pangenome_ref has a value which is a string
 	genomes has a value which is a reference to a list where each element is a string
-	classes has a value which is a reference to a list where each element is an int
+	classes has a value which is a reference to a list where each element is a string
+	runCount has a value which is an int
 FSOutput is a reference to a hash where the following keys are defined:
 	temp has a value which is a string
 	report_name has a value which is a string
@@ -285,7 +287,8 @@ a reference to a hash where the following keys are defined:
 workspace_name has a value which is a string
 pangenome_ref has a value which is a string
 genomes has a value which is a reference to a list where each element is a string
-classes has a value which is a reference to a list where each element is an int
+classes has a value which is a reference to a list where each element is a string
+runCount has a value which is an int
 
 </pre>
 
@@ -297,7 +300,8 @@ a reference to a hash where the following keys are defined:
 workspace_name has a value which is a string
 pangenome_ref has a value which is a string
 genomes has a value which is a reference to a list where each element is a string
-classes has a value which is a reference to a list where each element is an int
+classes has a value which is a reference to a list where each element is a string
+runCount has a value which is an int
 
 
 =end text
