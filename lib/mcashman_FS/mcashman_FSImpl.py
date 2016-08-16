@@ -115,13 +115,13 @@ class mcashman_FS:
 
 	### STEP 4 - Create random list of indices
 	Index=[]
-	for i in range(0,len(params['orthologs'])):
+	for i in range(0,len(pan['orthologs'])):
 		Index.append(i)
 
 	print("Size of genomes: " + str(len(Strains)))
 	print("Size of genes: " + str(len(Genes)))
 	
-	for k in range(0,pan['runCount']):#loop for running in Weka x  times	
+	for k in range(0,params['runCount']):#loop for running in Weka x  times	
 		print("Run " + str(k))
 		random.shuffle(Index)
 
