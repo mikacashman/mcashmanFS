@@ -54,6 +54,14 @@ class mcashman_FS:
 		raise ValueError('Parameter pangenome_ref is not set in input arguments')
 	pangenome = params['pangenome_ref']
 	print("runCount: " + str(params['runCount']))
+	runCountOrig = params['runCount']
+	runCount = None
+	try:
+		runCount=int(params['runCount'])
+	except ValueError:
+		raise ValueError('Cannot parse integer from runCount parameter' + str(params['runCount']))
+	if runCount<1:
+		raise ValueError('runCount must be more than zero')	
 
 	### STEP 2 - Get the Input Data
 	token = ctx['token']
