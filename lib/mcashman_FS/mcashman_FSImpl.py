@@ -53,6 +53,7 @@ class mcashman_FS:
 	if 'pangenome_ref' not in params:
 		raise ValueError('Parameter pangenome_ref is not set in input arguments')
 	pangenome = params['pangenome_ref']
+	print("runCount: " + str(params['runCount']))
 
 	### STEP 2 - Get the Input Data
 	token = ctx['token']
@@ -121,6 +122,7 @@ class mcashman_FS:
 	print("Size of genomes: " + str(len(Strains)))
 	print("Size of genes: " + str(len(Genes)))
 	
+	print("runCount: " + str(params['runCount']))
 	for k in range(0,params['runCount']):#loop for running in Weka x  times	
 		print("Run " + str(k))
 		random.shuffle(Index)
