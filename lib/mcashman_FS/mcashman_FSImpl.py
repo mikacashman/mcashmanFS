@@ -121,7 +121,7 @@ class mcashman_FS:
 	print("Size of genomes: " + str(len(Strains)))
 	print("Size of genes: " + str(len(Genes)))
 	
-	for k in range(0,10):#loop for running in Weka x  times	
+	for k in range(0,params['runCount']):#loop for running in Weka x  times	
 		print("Run " + str(k))
 		random.shuffle(Index)
 

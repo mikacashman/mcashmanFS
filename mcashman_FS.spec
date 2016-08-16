@@ -13,6 +13,7 @@ module mcashman_FS {
 		string pangenome_ref;
 		list <string> genomes;
 		list <string> classes;
+		int runCount;
 	}FSParams;
 
 	typedef structure{

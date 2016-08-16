@@ -63,7 +63,18 @@
             "text_options": {
                 "validate_as": "string"
             }
-          }
+          },
+	  {
+            "id": "runCount",
+            "optional": true,
+            "advanced": true,
+            "allow_multiple": false,
+            "default_values": [ 100 ],
+            "field_type": "int",
+            "text_options": {
+                "valid_as": "int"
+            }
+        }
 	  ],
    "behavior" : {
         "service-mapping": {

@@ -52,7 +52,14 @@ parameters :
             Class labels
         long-hint  : |
             A list of the class labels, one for each genome
-  
+
+    runCount :
+        ui-name : |
+           Number of runs
+        short-hint : |
+           Number of runs of trees
+        long-hint : |
+           Number of runs of random classification trees  
 
 description : |
     <p>App runs Weka J48 decision tree classifier on a pangenome.  Attributes are the genes and the classes are defined by the user (e.g. Growth).  Testing is currently preformed on complete dataSet as to evaluate the attribute choices.  This app should be used for feature selection and NOT for classification.</p>
