@@ -115,7 +115,7 @@ class mcashman_FS:
 
 	### STEP 4 - Create random list of indices
 	Index=[]
-	for i in range(0,len(pan['orthologs'])):
+	for i in range(0,len(params['orthologs'])):
 		Index.append(i)
 
 	print("Size of genomes: " + str(len(Strains)))
