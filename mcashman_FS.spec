@@ -12,7 +12,7 @@ module mcashman_FS {
 		string workspace_name;
 		string pangenome_ref;
 		list <string> genomes;
-		list <string> classes;
+		string classes;
 		int runCount;
 	}FSParams;
 

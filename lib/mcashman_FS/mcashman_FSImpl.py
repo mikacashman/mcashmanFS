@@ -62,6 +62,9 @@ class mcashman_FS:
 		raise ValueError('Cannot parse integer from runCount parameter' + str(params['runCount']))
 	if runCount<1:
 		raise ValueError('runCount must be more than zero')	
+	#parse class labels
+	classes=params['classes'].split(',')
+	
 
 	### STEP 2 - Get the Input Data
 	token = ctx['token']
@@ -76,7 +79,7 @@ class mcashman_FS:
 		orig_error = ''.join('   ' + line for line in lines)
 		raise ValueError('Error loading original Pangenome object from workspace:\n' + orig_error)
 	print('Got Pangenome')
-	if len(params['classes']) != len(pan['genome_refs']):
+	if len(classes) != len(pan['genome_refs']):
 		raise ValueError('Error: Number of classes and genomes don\'t match')
 	
 	### STEP 3 - Create Matrix
@@ -93,7 +96,7 @@ class mcashman_FS:
 		Strains.append(pan['genome_refs'][i])
 		ClassesOrdered.append(0)
 	for i in range(0,len(pan['genome_refs'])):
-		ClassesOrdered[Strains.index(params['genomes'][i])] = params['classes'][i]
+		ClassesOrdered[Strains.index(params['genomes'][i])] = classes[i]
 	for i in range(0,len(pan['genome_refs'])):
 		print(Strains[i] + " - " + str(ClassesOrdered[i]))
 	for i in range(0,len(pan['orthologs'])): #for each gene

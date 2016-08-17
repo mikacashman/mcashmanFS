@@ -49,9 +49,9 @@ parameters :
         ui-name : |
             Classes
         short-hint : |
-            Class labels
+            Class labels in genome order (seperate with commas)
         long-hint  : |
-            A list of the class labels, one for each genome
+            A list of the class labels, one for each genome in the order you specified, seperate with commas
 
     runCount :
         ui-name : |
