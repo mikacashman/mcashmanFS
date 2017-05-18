@@ -96,6 +96,7 @@ class mcashman_FS:
 		Strains.append(pan['genome_refs'][i])
 		ClassesOrdered.append(0)
 	for i in range(0,len(pan['genome_refs'])):
+		print(Strains.index(params['genomes'][i]))
 		ClassesOrdered[Strains.index(params['genomes'][i])] = classes[i]
 	for i in range(0,len(pan['genome_refs'])):
 		print(Strains[i] + " - " + str(ClassesOrdered[i]))
